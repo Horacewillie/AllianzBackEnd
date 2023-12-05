@@ -31,9 +31,9 @@ namespace AllianzBackEnd.API.Controllers
         }
 
 
-        [HttpPost("GetPurchaseHistory")]
+        [HttpGet("GetPurchaseHistory")]
         [Produces(typeof(ApiResponse<PurchaseHistoryResponse>))]
-        public async Task<IActionResult> GetPurchaseHistory([FromBody] GetPurchaseHistoryRequest request)
+        public async Task<IActionResult> GetPurchaseHistory([FromQuery] GetPurchaseHistoryRequest request)
         {
             var response = await _purchaseHistoryManager.GetPurchaseHistory(request);
 

@@ -29,17 +29,6 @@ namespace AllianzBackEnd.API
             //BuildConfig();
         }
 
-        //private void BuildConfig()
-        //{
-        //    var basePath = "/app/Secrets";
-
-        //    Configuration = new ConfigurationBuilder()
-        //        .SetBasePath(basePath)
-        //        .AddJsonFile($"appsettings.json", optional: true, reloadOnChange: true)
-        //        .AddEnvironmentVariables()
-        //        .Build();
-        //}
-
         private static void BuildConfigDev()
         {
             _ = new ConfigurationBuilder()
@@ -50,8 +39,6 @@ namespace AllianzBackEnd.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-
-            //var appSettings = Configuration.GetSection(nameof(AppSettings)).Get<AppSettings>();
 
 
             services.AddHttpClient<ApiClient>();
@@ -64,33 +51,10 @@ namespace AllianzBackEnd.API
 
             services.AddScoped<UserManager>();
 
-            //services.AddSingleton(provider =>
-            //{
-            //    var settings = appSettings;
-            //    return settings;
-            //});
 
-
-            ////JWT TOKEN VALIDATION
-            //services.AddAuthentication(x =>
-            //{
-            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //})
-            //.AddJwtBearer(x =>
-            //{
-            //    x.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        IssuerSigningKey = new SymmetricSecurityKey(Convert.FromBase64String(appSettings.JwtSecretKey)),
-            //        RequireExpirationTime = appSettings.IsExpirationSet,
-            //        ValidateIssuer = false,
-            //        ValidateAudience = false,
-            //    };
-            //});
             services.AddLogging();
             services.AddSingleton(p => Configuration.GetSection(nameof(FlutterWaveConfig)).Get<FlutterWaveConfig>());
-            //services.AddSingleton(p => Configuration.GetSection(nameof(GeneratePdfConfig)).Get<GeneratePdfConfig>());
-            //services.AddSingleton(p => Configuration.GetSection(nameof(AppSettings)).Get<AppSettings>());
+
 
             services.AddDbContext<DatabaseContext>(options =>
             {
@@ -104,7 +68,7 @@ namespace AllianzBackEnd.API
                 jsonOptions.JsonSerializerOptions.MaxDepth = 64;
             });
 
-
+         
             services.AddHsts(options =>
             {
                 options.Preload = true;
